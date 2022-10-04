@@ -45,6 +45,7 @@ void MatrixOrbitali2c::begin(uint8_t rows, uint8_t cols)
   noAutoScroll();
   noLineWrap();
   setContrast(128);
+  _moduletype=getModuleType();
 }
 
 // High Level Commands
@@ -256,3 +257,11 @@ void MatrixOrbitali2c::print(const String &s)
   Wire.endTransmission();
 }
 */
+uint8_t MatrixOrbitali2c::getModuleType()
+{
+  uint8_t type;
+  write(MO_COMMANDCHAR);
+  write(MO_READMODULETYPE);
+  Wire.requestFrom(_i2cport,1);
+  return Wire.read();
+}

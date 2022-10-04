@@ -57,6 +57,28 @@
 #define MO_BACKLIGHTOFF 0x46
 #define MO_GPIOOFF 0x56
 #define MO_GPIOON 0x57
+#define MO_READMODULETYPE 0x37
+
+// Module type values
+#define LCD0821 0x01
+#define LCD2021 0x03
+#define LCD2041 0x05
+#define LCD4041 0x07
+#define LK202_25 0x08
+#define LK204_25 0x09
+#define LK404_55 0x0A
+#define VFD2021 0x0B
+#define VFD2041 0x0C
+#define VK204_25PC 0x0E
+#define VK204_25 0x0F
+#define GLC12232 0x10
+#define GLC24064 0x13
+#define GLK24064_25 0x15
+#define GLK12232_25 0x22
+#define LK404_AT 0x31
+#define LK402_12 0x33
+#define LK162_12 0x34
+
 
 class MatrixOrbitali2c : public Print {
 public:
@@ -94,6 +116,7 @@ public:
 
   void createChar(uint8_t, uint8_t[]);
   void setCursor(uint8_t, uint8_t);
+  uint8_t getModuleType();
   virtual size_t write(uint8_t);
   virtual size_t write(const char *str);
 //  virtual void write(const uint8_t *buffer, size_t size);
@@ -102,5 +125,6 @@ public:
 private:
 
   uint8_t _i2cport;
+  uint8_t _moduletype;
 };
 #endif
